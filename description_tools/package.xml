@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+  
+  <name>description_tools</name>
+  <version>0.0.0</version>
+  
+  <description>The description_tools package</description>
+  <maintainer email="mirec@todo.todo">mirec</maintainer>
+
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+
+  <export>
+
+  </export>
+</package>

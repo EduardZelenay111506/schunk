@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro = "http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name = "tube_rack" params ="parent *origin has_parent tool_point">
+
+    <joint name="${parent}_tube_rack_joint" type="fixed">
+      <xacro:insert_block name="origin" />
+      <parent link="${parent}"/>
+      <child link="tube_rack_stl_link"/>
+    </joint>
+
+    <link name="tube_rack_stl_link">
+      <inertial>
+        <mass value="0.3"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://description_other/meshes/tube_rack/tube_rack.stl"  scale = "0.001 0.001 0.001" />
+        </geometry>
+	<material name="Schunk/DarkGrey"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://description_other/meshes/tube_rack/tube_rack.stl"  scale = "0.001 0.001 0.001" />
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="tube_rack_${tool_point}_joint" type="fixed">
+	<origin xyz="0 0 0" rpy="0 0 0" />
+	<parent link="tube_rack_stl_link"/>
+	<child link="${tool_point}"/>    
+    </joint>
+
+    <link name ="${tool_point}"/>
+
+    <gazebo reference="tube_rack_stl_link">
+      <gravity>true</gravity>
+      <self_collide>false</self_collide>
+      <material value="Schunk/DarkGrey" />
+    </gazebo>
+
+  </xacro:macro>
+
+</robot>

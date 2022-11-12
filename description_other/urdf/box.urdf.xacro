@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro = "http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name = "box" params ="parent *origin has_parent tool_point">
+
+    <joint name="${parent}_box_joint" type="fixed">
+      <xacro:insert_block name="origin" />
+      <parent link="${parent}"/>
+      <child link="box_stl_link"/>
+    </joint>
+
+    <link name="box_stl_link">
+      <inertial>
+        <mass value="20"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://description_other/meshes/box/box.stl"  scale = "1 1 1" />
+        </geometry>
+	<material name="Schunk/DarkBlue"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://description_other/meshes/box/box.stl"  scale = "1 1 1" />
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="box_${tool_point}_joint" type="fixed">
+	<origin xyz="0 0 0" rpy="0 0 0" />
+	<parent link="box_stl_link"/>
+	<child link="${tool_point}"/>    
+    </joint>
+
+    <link name ="${tool_point}"/>
+
+    <gazebo reference="box_stl_link">
+      <gravity>true</gravity>
+      <self_collide>false</self_collide>
+      <material value="Schunk/DarkBlue" />
+    </gazebo>
+
+  </xacro:macro>
+
+</robot>

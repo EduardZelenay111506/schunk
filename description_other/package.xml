@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+  
+  <name>description_other</name>
+  <version>0.0.0</version>
+  
+  <description>The description_tools package</description>
+  <maintainer email="patrikbakyta@gmail.com">Patrik Bakyta</maintainer>
+
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+
+  <export>
+
+  </export>
+</package>
